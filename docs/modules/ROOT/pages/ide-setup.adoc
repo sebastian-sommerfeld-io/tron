@@ -20,7 +20,7 @@ VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=ms-vsco
 ----
 
 == Local Jira Instance
-This project comes with a local, pre-installed Jira instance. This instance is used for some automated tests and can additionally be used as a target for the `jiracli` app to read some data from a running Jira instance. 
+This project comes with a local, pre-installed Jira instance. This instance is used for some automated tests and can additionally be used as a target for the `tron` app to read some data from a running Jira instance. 
 
 To start / stop this instance, use `xref:AUTO-GENERATED:bash-docs/src/test/acceptance-tests/tests-sh.adoc[src/test/acceptance-tests/tests.sh]` and then access http://localhost:8080 from your browser. Log in with user = "admin" and password = "admin".
 

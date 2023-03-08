@@ -14,7 +14,7 @@ The project organizes its sources with several folders:
 |===
 |Directory |Description
 |`docs` |Project documentation in Asciidoc
-|`src/main/go` |The actual source code of the jiracli application
+|`src/main/go` |The actual source code of the Tron application
 |`src/main/postman` |Postman collections containing webservice calls
 |`src/test/acceptance-tests` |A Docker Compose configuration which starts a completely configured Jira instance and runs acceptance tests against this Jira instance.
 |`src/utils` |Utility modules which are used from other I(bash) scripts.

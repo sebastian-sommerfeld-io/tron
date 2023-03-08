@@ -20,16 +20,16 @@ To use this app and execute some commands against a Jira instance run this comma
 
 [source, bash]
 ----
-docker run --rm --network=host sommerfeldio/jiracli:latest
+docker run --rm --network=host sommerfeldio/tron:latest
 
 # Example commands which do more than just display help-texts
-docker run --rm --network=host sommerfeldio/jiracli:latest license view --baseUrl="http://localhost:8080" --user="<THE_USERNAME>" --pass="<THE_PASSWORD>"
+docker run --rm --network=host sommerfeldio/tron:latest license view --baseUrl="http://localhost:8080" --user="<THE_USERNAME>" --pass="<THE_PASSWORD>"
 ----
 
 In case you want to access a Jira instance that is not running on your local machine, you need to update the `--baseUrl`. Plus you can probably omit the `--network=host` flag.
 
 === Local IDE Setup
-For information on how to set up your local development environment, see link:https://www.sommerfeld.io/docs/projects/jiracli/main/index.html[IDE Setup] on www.sommerfeld.io.
+For information on how to set up your local development environment, see link:https://www.sommerfeld.io/docs/projects/tron/main/index.html[IDE Setup] on www.sommerfeld.io.
 
 == Risks and Technical Debts
 Scale for Probability and Impact: Low, Medium and High
