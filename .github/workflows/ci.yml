@@ -163,8 +163,8 @@ jobs:
           (
             cd src/main/go || exit
 
-            local TARGET_DIR="../../../target"
-            local COVERAGE_REPORT="go-code-coverage.out"
+            readonly TARGET_DIR="../../../target"
+            readonly COVERAGE_REPORT="go-code-coverage.out"
             mkdir -p "$TARGET_DIR"
 
             go test -coverprofile="./$COVERAGE_REPORT" ./...
