@@ -85,17 +85,7 @@ function test() {
   
   (
     cd go || exit
-  
-    local TARGET_DIR="../../../target"
-    local COVERAGE_REPORT="go-code-coverage.out"
-    mkdir -p "$TARGET_DIR"
-
-    go test -coverprofile="./$COVERAGE_REPORT" ./...
-
-    old='github.com/sebastian-sommerfeld-io/tron'
-    new='src/main/go'
-    sed -i "s|$old|$new|g" "$COVERAGE_REPORT"
-    mv "$COVERAGE_REPORT" "$TARGET_DIR/$COVERAGE_REPORT"
+    go test ./...
   )
 }
 
