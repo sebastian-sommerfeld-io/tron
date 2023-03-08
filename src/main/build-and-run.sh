@@ -102,7 +102,6 @@ function build() {
 function run() {
   LOG_HEADER "Run app in Docker container" "$@"
   docker run --rm --network=host "$TRON_IMAGE" "$@"
-  echo
 }
 
 
