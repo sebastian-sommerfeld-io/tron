@@ -222,9 +222,6 @@ jobs:
   validate-binary-deployment:
     runs-on: ubuntu-latest
     needs: ['build-deploy-binary']
-    strategy:
-      matrix:
-        platform: ['ubuntu-latest', 'windows-latest']
     steps:
       - name: Validate for given platforms
         if: ${{ github.actor != 'dependabot[bot]' }}
