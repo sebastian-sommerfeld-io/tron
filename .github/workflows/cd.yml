@@ -115,7 +115,9 @@ jobs:
           docker tag "$IMAGE:ci" "$IMAGE:latest"
           docker tag "$IMAGE:ci" "$IMAGE:$VERSION_TAG"
 
-          docker push "$IMAGE:latest"
+          if [[ "${{ github.event.inputs.version }}" != *"-SNAPSHOT"* ]]; then
+            docker push "$IMAGE:latest"
+          fi
           docker push "$IMAGE:$VERSION_TAG"
         shell: bash
 
@@ -129,7 +131,9 @@ jobs:
           VERSION_TAG="${{ github.event.inputs.version }}"
           IMAGE="sommerfeldio/tron"
 
-          docker pull "$IMAGE:latest"
+          if [[ "${{ github.event.inputs.version }}" != *"-SNAPSHOT"* ]]; then
+            docker pull "$IMAGE:latest"
+          fi
           docker pull "$IMAGE:$VERSION_TAG"
         shell: bash
 
@@ -172,9 +176,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_REPO_AND_PROJECT }}
         # If a matching git tag does not yet exist, one will automatically get created
         # from the latest state of the default branch.
-        # if SNAPSHOT then --prerelease
         run: |
-          gh release create "${{ github.event.inputs.version }}" --prerelease --generate-notes
+          if [[ "${{ github.event.inputs.version }}" != *"-SNAPSHOT"* ]]; then
+            gh release create "${{ github.event.inputs.version }}" --generate-notes
+          else
+            gh release create "${{ github.event.inputs.version }}"--prerelease --generate-notes
+          fi
 
           # Upload all tarballs in a directory as release assets
           # gh release create v1.2.3 ./dist/*.tgz
