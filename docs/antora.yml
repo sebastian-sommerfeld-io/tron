@@ -1,7 +1,7 @@
 ---
 name: tron
 title: Tron
-version: v0.1.0-SNAPSHOT
+version: v0.1.1-SNAPSHOT
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc
