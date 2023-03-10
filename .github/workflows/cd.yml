@@ -168,10 +168,8 @@ jobs:
     #   contents: write
     steps:
       - name: Checkout code
-        if: github.event.inputs.publish == 'true'
         uses: actions/checkout@v3
       - name: Create tag and Github release
-        if: github.event.inputs.publish == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN_REPO_AND_PROJECT }}
         # If a matching git tag does not yet exist, one will automatically get created
