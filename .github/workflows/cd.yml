@@ -166,12 +166,19 @@ jobs:
       - name: Checkout code
         if: github.event.inputs.publish == 'true'
         uses: actions/checkout@v3
-      - name: Create tag
+      - name: Create tag and Github release
         if: github.event.inputs.publish == 'true'
-        run: echo "Create a tag ${{ github.event.inputs.version }}"
-      - name: Create Github Release
-        if: github.event.inputs.publish == 'true'
-        run: echo "Create a Github Release ..."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_REPO_AND_PROJECT }}
+        # If a matching git tag does not yet exist, one will automatically get created
+        # from the latest state of the default branch.
+        # if SNAPSHOT then --prerelease
+        run: |
+          gh release create "${{ github.event.inputs.version }}" --prerelease --generate-notes
+
+          # Upload all tarballs in a directory as release assets
+          # gh release create v1.2.3 ./dist/*.tgz
+        shell: bash
 
   on-failure:
     runs-on: ubuntu-latest
