@@ -125,18 +125,10 @@ jobs:
         with:
           dockerfile: src/main/Dockerfile
 
-  test:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    needs: ['lint-yaml', 'lint-env-files', 'lint-folders', 'lint-filenames', 'shellcheck', 'lint-dockerfile']
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
   qodana-analysis:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    needs: ['lint-yaml', 'lint-env-files', 'lint-folders', 'lint-filenames', 'shellcheck', 'lint-dockerfile']
+    needs: ['generate-docs']
     permissions:
       security-events: write
     steps:
@@ -153,6 +145,14 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: target/qodana/report/results/qodana.sarif.json
+
+  test:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: ['lint-yaml', 'lint-env-files', 'lint-folders', 'lint-filenames', 'shellcheck', 'lint-dockerfile']
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
   build-deploy-binary:
     runs-on: ubuntu-latest
