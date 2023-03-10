@@ -217,7 +217,7 @@ jobs:
         run: |
           (
             cd src/main || exit
-            ./build-and-run.sh --version
+            ./tron.sh --version
           )
         shell: bash
       - name: Login to DockerHub

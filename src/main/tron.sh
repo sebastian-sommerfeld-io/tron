@@ -13,7 +13,7 @@
 #
 # [source, bash]
 # ```
-# ./build-and-run.sh --help
+# ./tron.sh --help
 # ```
 
 set -o errexit

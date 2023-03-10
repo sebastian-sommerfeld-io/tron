@@ -1,4 +1,4 @@
-= build-and-run.sh
+= tron.sh
 
 // +-----------------------------------------------+
 // |                                               |
@@ -26,7 +26,7 @@ testcases, builds a Docker container and runs the app inside the Docker containe
 [source, bash]
 
 ----
-./build-and-run.sh --help
+./tron.sh --help
 ----
 
 == Index
