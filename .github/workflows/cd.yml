@@ -9,9 +9,9 @@ on:
         required: true
       publish:
         type: boolean
-        description: If true, publish artifacts are published to DockerHub etc.
+        description: If true, artifacts are published to DockerHub etc.
         required: true
-        default: false
+        default: true
 
 permissions:
   contents: read
@@ -180,7 +180,7 @@ jobs:
           if [[ "${{ github.event.inputs.version }}" != *"-SNAPSHOT"* ]]; then
             gh release create "${{ github.event.inputs.version }}" --generate-notes
           else
-            gh release create "${{ github.event.inputs.version }}"--prerelease --generate-notes
+            gh release create "${{ github.event.inputs.version }}" --prerelease --generate-notes
           fi
 
           # Upload all tarballs in a directory as release assets
