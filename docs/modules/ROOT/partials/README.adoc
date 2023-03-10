@@ -8,7 +8,7 @@ image:{github-actions-url}/{job-cd}/{badge}[Github Badge, link={github-actions-u
 * Where to file issues -> {url-project}/issues
 
 == Tag scheme
-[cols="1,5", options="header"]
+[cols="1,3", options="header"]
 |===
 |Tag |Description
 |`v0.1.0` |A released version of the image. The most recent version is also available as `latest`.
