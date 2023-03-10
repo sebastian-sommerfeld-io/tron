@@ -1,5 +1,5 @@
 #!/bin/bash
-# @file build-and-run.sh
+# @file tron.sh
 # @brief Build, test and run the  Tron locally.
 #
 # @description The script builds, tests and runs the `tron` app locally. The script runs all
