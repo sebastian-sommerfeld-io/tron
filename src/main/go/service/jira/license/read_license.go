@@ -46,13 +46,10 @@ func ReadJiraLicense(config model.TronConfig) (model.JiraLicense, error) {
 		return errorObjects(err)
 	}
 
-	bodyString := string(body)
-
 	result := &model.JiraLicense{}
 	if err := json.Unmarshal(body, result); err != nil {
 		return errorObjects(err)
 	}
-	result.RawJson = bodyString
 
 	return *result, nil
 }

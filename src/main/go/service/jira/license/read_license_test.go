@@ -1,7 +1,6 @@
 package license
 
 import (
-	"encoding/json"
 	"errors"
 	"net/http"
 	"net/http/httptest"
@@ -12,7 +11,7 @@ import (
 )
 
 func Test_ShouldGetLicense(t *testing.T) {
-	licenseJson := `{"valid":true,"evaluation":true,"maximumNumberOfUsers":-1,"licenseType":"Commercial","creationDateString":"14/Feb/23","expiryDate":1678971600000,"expiryDateString":"16/Mar/23","organizationName":"sebastian@sommerfeld.io","dataCenter":true,"subscription":true,"rawLicense":"THE_ACTUAL_LICENSE","expired":false,"supportEntitlementNumber":"SEN-L19188898","enterprise":false,"active":true,"autoRenewal":false}`
+	licenseJson := `{"valid":true,"evaluation":true,"maximumNumberOfUsers":-1,"licenseType":"Commercial","creationDateString":"14/Feb/23","expiryDate":1678971600000,"expiryDateString":"16/Mar/23","organizationName":"sebastian@sommerfeld.io","dataCenter":true,"subscription":true,"rawLicense":"THE_ACTUAL_LICENSE","expired":false,"SEN":"SEN-L19188898","enterprise":false,"active":true,"autoRenewal":false}`
 
 	testCases := []struct {
 		name             string
@@ -33,23 +32,22 @@ func Test_ShouldGetLicense(t *testing.T) {
 				}
 			})),
 			expectedResponse: &model.JiraLicense{
-				Valid:                    true,
-				Evaluation:               true,
-				MaximumNumberOfUsers:     -1,
-				LicenseType:              "Commercial",
-				CreationDateString:       "14/Feb/23",
-				ExpiryDate:               1678971600000,
-				ExpiryDateString:         "16/Mar/23",
-				OrganizationName:         "sebastian@sommerfeld.io",
-				DataCenter:               true,
-				Subscription:             true,
-				RawLicense:               "THE_ACTUAL_LICENSE",
-				Expired:                  false,
-				SupportEntitlementNumber: "SEN-L19188898",
-				Enterprise:               false,
-				Active:                   true,
-				AutoRenewal:              false,
-				RawJson:                  licenseJson,
+				Valid:                true,
+				Evaluation:           true,
+				MaximumNumberOfUsers: -1,
+				LicenseType:          "Commercial",
+				CreationDateString:   "14/Feb/23",
+				ExpiryDate:           1678971600000,
+				ExpiryDateString:     "16/Mar/23",
+				OrganizationName:     "sebastian@sommerfeld.io",
+				DataCenter:           true,
+				Subscription:         true,
+				RawLicense:           "THE_ACTUAL_LICENSE",
+				Expired:              false,
+				SEN:                  "SEN-L19188898",
+				Enterprise:           false,
+				Active:               true,
+				AutoRenewal:          false,
 			},
 			expectedErr: nil,
 		},
@@ -67,7 +65,10 @@ func Test_ShouldGetLicense(t *testing.T) {
 			got, err := ReadJiraLicense(config)
 
 			assert.Nil(t, err)
-			assert.True(t, json.Valid([]byte(got.RawJson)), "JSON should be valid")
+			assert.NotNil(t, got)
+			assert.Equal(t, testCase.expectedResponse.SEN, got.SEN)
+			assert.Equal(t, testCase.expectedResponse.RawLicense, got.RawLicense)
+			assert.Equal(t, testCase.expectedResponse.ExpiryDate, got.ExpiryDate)
 		})
 	}
 }
