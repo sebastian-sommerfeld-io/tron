@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// NewCmdLicenseView initializes the `jiracli license` command.
+// NewCmdLicense initializes the `jiracli license` command.
 func NewCmdLicense() *cobra.Command {
 
 	cmd := &cobra.Command{
