@@ -22,18 +22,10 @@ VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=ms-vsco
 == Local Jira Instance
 This project comes with a local, pre-installed Jira instance. This instance is used for some automated tests and can additionally be used as a target for the `tron` app to read some data from a running Jira instance. 
 
-To start / stop this instance, use `xref:AUTO-GENERATED:bash-docs/src/test/acceptance-tests/tests-sh.adoc[src/test/acceptance-tests/tests.sh]` and then access http://localhost:8080 from your browser. Log in with user = "admin" and password = "admin".
+To start / stop this instance, use `xref:AUTO-GENERATED:bash-docs/src/util/jira/jira-sh.adoc[src/util/jira/jira.sh]` and then access http://localhost:8080 from your browser. Log in with user = "admin" and password = "admin".
 
-=== Update Jira Baseline (H2DB)
-To get the current h2db data from the Jira instance, start the container and run the following commands.
-
-[source, bash]
-----
-cd src/test/acceptance-tests/jira-runtime/assets/jira || exit
-
-docker cp jira:/var/atlassian/application-data/jira/database/h2db.mv.db ./database
-----
-
-Currently there are no attachments, so there is no need to save any data other than the database.
-
+=== Update Jira Database (H2DB)
 NOTE: This Jira instance uses a 30-day trial license and will expire regularly. To use this instance again, get a new (30-day trial) license, update license in the Jira UI and update the h2db (see above).
+
+To get the current h2db data from the Jira instance, start the container and run the following commands. Currently there are no attachments, so there is no need to save any data other than the database. Use the `xref:AUTO-GENERATED:bash-docs/src/util/jira/jira-sh.adoc[src/util/jira/jira.sh]` script to read the database from the container and store locally in this repository.
+
