@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 
-	"github.com/sebastian-sommerfeld-io/tron/model"
+	"github.com/sebastian-sommerfeld-io/tron/service"
 	"github.com/spf13/cobra"
 )
 
@@ -30,24 +30,7 @@ func NewCmdConfigView() *cobra.Command {
 		Args:  cobra.ExactArgs(0),
 
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(model.Config)
-		},
-	}
-
-	return cmd
-}
-
-// NewCmdConfigInit initializes the `tron config init` command.
-func NewCmdConfigInit() *cobra.Command {
-
-	cmd := &cobra.Command{
-		Use:   "init",
-		Short: "Initialize a new tron config file.",
-		Long:  "Initialize a new tron config file. Config contains connection information etc.",
-		Args:  cobra.ExactArgs(0),
-
-		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("config view")
+			fmt.Println(service.ReadConfig())
 		},
 	}
 

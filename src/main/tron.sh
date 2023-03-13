@@ -101,7 +101,11 @@ function build() {
 # @arg $@ String The ``tron`` commands (1-n arguments) - $1 is mandatory
 function run() {
   LOG_HEADER "Run app in Docker container" "$@"
-  docker run --rm --network=host "$TRON_IMAGE" "$@"
+  docker run --rm \
+    --volume "$(pwd)/tron.yml:$(pwd)/tron.yml" \
+    --workdir "$(pwd)" \
+    --network=host \
+    "$TRON_IMAGE" "$@"
 }
 
 

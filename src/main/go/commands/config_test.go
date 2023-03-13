@@ -34,17 +34,3 @@ func Test_ShouldCreateCmdConfigView(t *testing.T) {
 	assert.NotEmpty(t, got.Long)
 	assert.True(t, got.Runnable(), "Command should be runnable")
 }
-
-func Test_ShouldCreateCmdConfigInit(t *testing.T) {
-	expectedCmd := &cobra.Command{
-		Use:  "init",
-		Args: cobra.ExactArgs(0),
-	}
-
-	got := NewCmdConfigInit()
-	assert.NotNil(t, got)
-	assert.Equal(t, expectedCmd.Use, got.Use)
-	assert.NotEmpty(t, got.Short)
-	assert.NotEmpty(t, got.Long)
-	assert.True(t, got.Runnable(), "Command should be runnable")
-}

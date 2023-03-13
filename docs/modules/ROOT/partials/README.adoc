@@ -26,14 +26,34 @@ To develop and run the application you need a Linux environment with Docker inst
 Tron is a security program from the 1982 American science fiction action-adventure film by same name, to monitor communications between the  Master Control Program (MCP) and the real world. He is the main digital protagonist of the first film. 
 
 == How to use this project
-To use this app and execute some commands against a Jira instance run this command:
+To use this app and execute some commands against a Jira instance create a `tron.yml` file in the same directory from where you start the docker container. Commands that actually interact with a Jira instance rely on a valid config file.
+
+[source, yaml]
+----
+---
+# The url to your jira instance
+baseUrl: http://localhost:8080
+# Username and password of the user you use to query the Jira API
+username: admin
+password: admin
+----
+
+Since the password is part of the `tron.yml` file, it is not recommended to store the file in your repository. Make sure you handle your secrets properly.
+
+To start the container, run one of these commands:
 
 [source, bash]
 ----
-docker run --rm --network=host sommerfeldio/tron:latest --version
-----
+docker run --rm --network=host sommerfeldio/tron:latest
 
-In case you want to access a Jira instance that is not running on your local machine, you need to update the `--baseUrl`. Plus you can probably omit the `--network=host` flag.
+docker run --rm --network=host sommerfeldio/tron:latest -- version
+
+docker run --rm \
+  --volume "$(pwd)/tron.yml:$(pwd)/tron.yml" \
+  --workdir "$(pwd)" \
+  --network=host \
+  sommerfeldio/tron:latest config view
+----
 
 === Local IDE Setup
 For information on how to set up your local development environment, see link:https://www.sommerfeld.io/docs/projects/tron/main/index.html[IDE Setup] on www.sommerfeld.io.

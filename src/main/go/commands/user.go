@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/sebastian-sommerfeld-io/tron/model"
+	"github.com/sebastian-sommerfeld-io/tron/service"
 	"github.com/sebastian-sommerfeld-io/tron/service/jira/user"
 	"github.com/spf13/cobra"
 )
@@ -53,7 +54,7 @@ func NewCmdUserRead() *cobra.Command {
 
 		Run: func(cmd *cobra.Command, args []string) {
 			username := getUsernameValue(cmd)
-			jiraUser := readUser(model.Config, username)
+			jiraUser := readUser(service.ReadConfig(), username)
 			if (jiraUser == model.JiraUser{}) {
 				log.Fatal("no user found for username " + username)
 			}
@@ -83,7 +84,7 @@ func NewCmdUserExists() *cobra.Command {
 		Args:  cobra.ExactArgs(0),
 
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(userExists(model.Config, getUsernameValue(cmd)))
+			fmt.Println(userExists(service.ReadConfig(), getUsernameValue(cmd)))
 		},
 	}
 
@@ -105,7 +106,7 @@ func NewCmdUserListProjects() *cobra.Command {
 		Args:  cobra.ExactArgs(0),
 
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(listProjects(model.Config, getUsernameValue(cmd)))
+			fmt.Println(listProjects(service.ReadConfig(), getUsernameValue(cmd)))
 		},
 	}
 
@@ -115,7 +116,7 @@ func NewCmdUserListProjects() *cobra.Command {
 }
 
 func listProjects(config model.TronConfig, username string) string {
-	if !userExists(model.Config, username) {
+	if !userExists(config, username) {
 		log.Fatal("no user found for username " + username)
 	}
 
