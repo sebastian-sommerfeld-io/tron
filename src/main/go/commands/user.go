@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/sebastian-sommerfeld-io/tron/model"
+	"github.com/sebastian-sommerfeld-io/tron/service/jira/user"
 	"github.com/spf13/cobra"
 )
 
@@ -50,13 +52,21 @@ func NewCmdUserExists() *cobra.Command {
 		Args:  cobra.ExactArgs(0),
 
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(getUsernameValue(cmd))
+			fmt.Println(userExists(model.Config, getUsernameValue(cmd)))
 		},
 	}
 
 	addFlags(cmd)
 
 	return cmd
+}
+
+func userExists(config model.TronConfig, username string) bool {
+	jiraUser, err := user.ReadJiraUser(config, username)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return jiraUser != model.JiraUser{}
 }
 
 // NewCmdUser initializes the `tron user list-projects` command.
