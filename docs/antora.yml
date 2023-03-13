@@ -1,7 +1,7 @@
 ---
 name: tron
 title: Tron
-version: main
+version: 11-read-license-from-jira
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc
