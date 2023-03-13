@@ -21,6 +21,20 @@ func Test_ShouldCreateCmdUser(t *testing.T) {
 	assert.False(t, got.Runnable(), "Command should NOT be runnable")
 }
 
+func Test_ShouldCreateCmdUserRead(t *testing.T) {
+	expectedCmd := &cobra.Command{
+		Use:  "read",
+		Args: cobra.ExactArgs(0),
+	}
+
+	got := NewCmdUserRead()
+	assert.NotNil(t, got)
+	assert.Equal(t, expectedCmd.Use, got.Use)
+	assert.NotEmpty(t, got.Short)
+	assert.NotEmpty(t, got.Long)
+	assert.True(t, got.Runnable(), "Command should be runnable")
+}
+
 func Test_ShouldCreateCmdUserExists(t *testing.T) {
 	expectedCmd := &cobra.Command{
 		Use:  "exists",

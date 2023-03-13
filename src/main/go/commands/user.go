@@ -44,6 +44,37 @@ func NewCmdUser() *cobra.Command {
 }
 
 // NewCmdUser initializes the `tron user list-projects` command.
+func NewCmdUserRead() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "read",
+		Short: "Read a user from a Jira Instance.",
+		Long:  "Read a user from a Jira Instance based on the username.",
+		Args:  cobra.ExactArgs(0),
+
+		Run: func(cmd *cobra.Command, args []string) {
+			username := getUsernameValue(cmd)
+			jiraUser := readUser(model.Config, username)
+			if (jiraUser == model.JiraUser{}) {
+				log.Fatal("no user found for username " + username)
+			}
+			fmt.Println(jiraUser)
+		},
+	}
+
+	addFlags(cmd)
+
+	return cmd
+}
+
+func readUser(config model.TronConfig, username string) model.JiraUser {
+	jiraUser, err := user.ReadJiraUser(config, username)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return jiraUser
+}
+
+// NewCmdUser initializes the `tron user list-projects` command.
 func NewCmdUserExists() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "exists",
@@ -62,11 +93,7 @@ func NewCmdUserExists() *cobra.Command {
 }
 
 func userExists(config model.TronConfig, username string) bool {
-	jiraUser, err := user.ReadJiraUser(config, username)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return jiraUser != model.JiraUser{}
+	return readUser(config, username) != model.JiraUser{}
 }
 
 // NewCmdUser initializes the `tron user list-projects` command.

@@ -36,6 +36,7 @@ func init() {
 	userCmd := NewCmdUser()
 	rootCmd.AddCommand(userCmd)
 
+	userCmd.AddCommand(NewCmdUserRead())
 	userCmd.AddCommand(NewCmdUserExists())
 	userCmd.AddCommand(NewCmdUserListProjects())
 
