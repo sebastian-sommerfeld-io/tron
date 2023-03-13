@@ -105,11 +105,19 @@ func NewCmdUserListProjects() *cobra.Command {
 		Args:  cobra.ExactArgs(0),
 
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(getUsernameValue(cmd) + " call real implementation here")
+			fmt.Println(listProjects(model.Config, getUsernameValue(cmd)))
 		},
 	}
 
 	addFlags(cmd)
 
 	return cmd
+}
+
+func listProjects(config model.TronConfig, username string) string {
+	if !userExists(model.Config, username) {
+		log.Fatal("no user found for username " + username)
+	}
+
+	return "return real data here"
 }
