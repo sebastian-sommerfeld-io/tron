@@ -1,7 +1,7 @@
 ---
 name: tron
 title: Tron
-version: 18-configure-tron-from-yaml
+version: main
 start_page: ROOT:index.adoc
 nav:
   - modules/ROOT/nav.adoc
