@@ -26,7 +26,26 @@ instance. The `local/tron:test` image is build before starting Jira.
 [source, bash]
 
 ----
-./tests.sh start
-./tests.sh logs
-./tests.sh stop
+./tests.sh
+----
+
+== Index
+
+* <<_index,index>>
+
+=== index
+
+When starting Jira, the instance is provided with a h2db and is populated with a
+license, users and projects so there is no need re-run the setup wizard all the time. This data
+defines a baseline which is the same everytime this test-stack starts.
+
+The only issue is, that there is no data visible in the UI after starting up because  there is
+no (or at least no uncorrupted) index. A new index must be created in the foreground triggered
+through the link:https://docs.atlassian.com/software/jira/docs/api/REST/8.22.6[Jira REST API].
+
+==== Example
+
+[,bash]
+----
+index
 ----
