@@ -31,8 +31,8 @@ readonly TRON_IMAGE="local/tron:dev"
 # are delegated to the link:https://hub.docker.com/_/golang[golang] Docker image).
 #
 # The current working directory is mounted into the container and selected as working directory
-# so all files are available to ``go``. Paths are not preserved. The working directory is placed
-# in ``/app`` (in the container) to make sure paths to the go app are the same everywhere (Go
+# so all files are available to ``go``. Paths are preserved. The working directory is placed
+# in ``$(pwd)`` (in the container) to make sure paths to the go app are the same everywhere (Go
 # wrapper container, Dev Container and all images built from ``src/main/Dockerfile``). Keep in
 # mind that most functions in this script (which call this ``go`` wrapper function) first ``cd``
 # into the ``go`` folder. So most of the time the current working direktory is not ``src/main``
@@ -59,8 +59,8 @@ function go() {
     --volume /etc/group:/etc/group:ro \
     --user "$(id -u):$(id -g)" \
     --volume "/tmp/$USER/.cache:/home/$USER/.cache" \
-    --volume "$(pwd):/app" \
-    --workdir "/app" \
+    --volume "$(pwd):$(pwd)" \
+    --workdir "$(pwd)" \
     --network host \
     golang:1.20-rc-alpine go "$@"
 }
@@ -101,7 +101,11 @@ function build() {
 # @arg $@ String The ``tron`` commands (1-n arguments) - $1 is mandatory
 function run() {
   LOG_HEADER "Run app in Docker container" "$@"
-  docker run --rm --network=host "$TRON_IMAGE" "$@"
+  docker run --rm \
+    --volume "$(pwd)/tron.yml:$(pwd)/tron.yml" \
+    --workdir "$(pwd)" \
+    --network=host \
+    "$TRON_IMAGE" "$@"
 }
 
 

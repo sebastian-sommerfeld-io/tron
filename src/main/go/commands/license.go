@@ -5,11 +5,12 @@ import (
 	"log"
 
 	"github.com/sebastian-sommerfeld-io/tron/model"
+	"github.com/sebastian-sommerfeld-io/tron/service"
 	"github.com/sebastian-sommerfeld-io/tron/service/jira/license"
 	"github.com/spf13/cobra"
 )
 
-// NewCmdLicenseView initializes the `jiracli license` command.
+// NewCmdLicense initializes the `jiracli license` command.
 func NewCmdLicense() *cobra.Command {
 
 	cmd := &cobra.Command{
@@ -19,7 +20,7 @@ func NewCmdLicense() *cobra.Command {
 		Args:  cobra.ExactArgs(0),
 
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println(jiraSoftwareLicense(model.Config))
+			fmt.Println(jiraSoftwareLicense(service.ReadConfig()))
 		},
 	}
 

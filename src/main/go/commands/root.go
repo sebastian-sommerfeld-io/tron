@@ -33,6 +33,10 @@ var rootCmd *cobra.Command
 func init() {
 	rootCmd = NewCmdRoot()
 
+	configCmd := NewCmdConfig()
+	rootCmd.AddCommand(configCmd)
+	configCmd.AddCommand(NewCmdConfigView())
+
 	userCmd := NewCmdUser()
 	rootCmd.AddCommand(userCmd)
 	userCmd.AddCommand(NewCmdUserRead())
