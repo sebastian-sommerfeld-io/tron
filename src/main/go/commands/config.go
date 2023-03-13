@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 
+	"github.com/sebastian-sommerfeld-io/tron/model"
 	"github.com/spf13/cobra"
 )
 
@@ -29,7 +30,7 @@ func NewCmdConfigView() *cobra.Command {
 		Args:  cobra.ExactArgs(0),
 
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("config view")
+			fmt.Println(model.Config)
 		},
 	}
 

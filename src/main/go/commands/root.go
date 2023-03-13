@@ -38,13 +38,16 @@ func init() {
 	configCmd.AddCommand(NewCmdConfigView())
 	configCmd.AddCommand(NewCmdConfigInit())
 
+	jiraCmd := NewCmdJira()
+	rootCmd.AddCommand(jiraCmd)
+
 	userCmd := NewCmdUser()
-	rootCmd.AddCommand(userCmd)
+	jiraCmd.AddCommand(userCmd)
 	userCmd.AddCommand(NewCmdUserRead())
 	userCmd.AddCommand(NewCmdUserExists())
 	userCmd.AddCommand(NewCmdUserListProjects())
 
-	rootCmd.AddCommand(NewCmdLicense())
+	jiraCmd.AddCommand(NewCmdLicense())
 
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
 }
