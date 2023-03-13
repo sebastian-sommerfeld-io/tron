@@ -208,6 +208,55 @@
 					"name": "Show all users for a project",
 					"item": [
 						{
+							"name": "0 - get single user (exists?)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/rest/api/2/user?username=cloud",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest",
+										"api",
+										"2",
+										"user"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "cloud"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "1 - get all projects",
 							"request": {
 								"auth": {
@@ -370,55 +419,6 @@
 							"response": []
 						}
 					]
-				},
-				{
-					"name": "get single user",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/rest/api/2/user?username=cloud",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"rest",
-								"api",
-								"2",
-								"user"
-							],
-							"query": [
-								{
-									"key": "username",
-									"value": "cloud"
-								}
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
