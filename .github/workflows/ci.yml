@@ -148,7 +148,6 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     needs: ['lint-yaml', 'lint-env-files', 'lint-folders', 'lint-filenames', 'shellcheck', 'lint-dockerfile']
     strategy:
       matrix:
@@ -216,6 +215,7 @@ jobs:
           )
         shell: bash
       - name: Deploy
+        if: ${{ github.actor != 'dependabot[bot]' }}
         run: echo "TODO ... deploy binary to somewhere (does github offer some sort of artifact repo ala artifactory?)"
         shell: bash
 

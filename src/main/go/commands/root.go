@@ -35,10 +35,11 @@ func init() {
 
 	userCmd := NewCmdUser()
 	rootCmd.AddCommand(userCmd)
-
 	userCmd.AddCommand(NewCmdUserRead())
 	userCmd.AddCommand(NewCmdUserExists())
 	userCmd.AddCommand(NewCmdUserListProjects())
+
+	rootCmd.AddCommand(NewCmdLicense())
 
 	rootCmd.CompletionOptions.HiddenDefaultCmd = true
 }
